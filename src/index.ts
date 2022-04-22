@@ -1,1 +1,17 @@
-import {  } from 'rxjs'
+import { range, fromEvent } from 'rxjs';
+import { map } from 'rxjs/operators'
+
+// range(1,5).pipe(
+//     map<number,string>(each => (each * 10).toString())
+// ).subscribe( console.log )
+
+const keyup$ = fromEvent<KeyboardEvent>(document, 'keyup');
+keyup$.pipe(
+    map(event => event.code)
+)
+const keyupCode$ = keyup$.pipe(
+    map(event => event.code)
+)
+
+keyupCode$.subscribe(code => console.log('map', code))
+
